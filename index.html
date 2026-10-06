@@ -57,12 +57,42 @@
     <header class="bg-gradient-to-br from-primary-700 via-primary-600 to-primary-800">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex justify-between items-center">
-                <a href="./" aria-label="Rundoc home">
-                    <img src="doc.png" alt="Rundoc" class="h-7 sm:h-8 w-auto">
-                </a>
+                <div class="relative flex items-center" x-data="{ open: false }" @keydown.escape.window="open = false">
+                    <a href="./" aria-label="Rundoc home">
+                        <img src="doc.png" alt="Rundoc" class="h-7 sm:h-8 w-auto">
+                    </a>
+                    <button type="button" @click="open = !open" :aria-expanded="open.toString()" aria-haspopup="true" aria-label="More from RunCorp"
+                            class="ml-1.5 p-1 rounded text-white/70 hover:text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors">
+                        <svg class="h-4 w-4 transition-transform" :class="open && 'rotate-180'" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-cloak x-transition @click.outside="open = false"
+                         class="absolute left-0 top-full mt-3 w-72 rounded-lg bg-gray-900 shadow-xl ring-1 ring-white/10 py-2 z-50">
+                        <p class="px-4 pt-1 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400">More from RunCorp</p>
+                        <a href="https://runcfg.com" target="_blank" rel="noopener" class="block px-4 py-2.5 hover:bg-white/5 transition-colors">
+                            <img src="brand/cfg.png" alt="Runcfg" class="h-5 w-auto">
+                            <span class="block mt-1.5 text-xs text-gray-400">Runtime configuration &amp; feature flags</span>
+                        </a>
+                        <a href="https://runccc.dev" target="_blank" rel="noopener" class="block px-4 py-2.5 hover:bg-white/5 transition-colors">
+                            <img src="brand/ccc.png" alt="Runccc" class="h-5 w-auto">
+                            <span class="block mt-1.5 text-xs text-gray-400">Code change capture - Static Analyser</span>
+                        </a>
+                        <a href="https://teams.runccc.dev" target="_blank" rel="noopener" class="block px-4 py-2.5 hover:bg-white/5 transition-colors">
+                            <span class="flex items-center gap-2">
+                                <img src="brand/ccc.png" alt="Runccc" class="h-5 w-auto">
+                                <span class="px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold uppercase tracking-wider bg-white/10 text-gray-200">Teams</span>
+                            </span>
+                            <span class="block mt-1.5 text-xs text-gray-400">Encrypted agent replays - for your team</span>
+                        </a>
+                        <div class="mt-2 pt-2 border-t border-white/10">
+                            <a href="https://runcorp.dev" target="_blank" rel="noopener" class="block px-4 py-1.5 text-xs text-gray-400 hover:text-white transition-colors">runcorp.dev &rarr;</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="flex items-center space-x-4">
+                    <a href="#install" class="text-primary-100 hover:text-white transition-colors">Install</a>
                     <a href="https://github.com/colwill/doc" class="hidden sm:inline text-primary-100 hover:text-white transition-colors">GitHub</a>
-                    <a href="https://runcorp.dev/#contact" class="bg-white text-primary-600 px-4 py-2 rounded-lg font-medium hover:bg-primary-50 transition-colors">Talk to us</a>
                 </div>
             </div>
         </nav>
@@ -75,14 +105,14 @@
                 Rundoc brings your resources, access control, knowledge, collaboration, processes, automation, software templates, feature flags and self-service infrastructure into one place, and keeps them connected to the teams and services they belong to.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://runcorp.dev/#contact" class="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-50 transition-colors shadow-lg">
-                    Book a demo
+                <a href="#install" class="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-50 transition-colors shadow-lg">
+                    Install
                 </a>
                 <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors">
                     See Features
                 </a>
             </div>
-            <p class="mt-6 text-primary-200 text-sm">Self-hosted with Docker Compose. Open source core.</p>
+            <p class="mt-6 text-primary-200 text-sm">Self-host. Open source core.</p>
         </div>
         <div class="relative">
             <svg class="w-full h-16 text-gray-50" preserveAspectRatio="none" viewBox="0 0 1440 54" fill="currentColor">
@@ -104,7 +134,7 @@
                         Open at the core
                     </h2>
                     <p class="mt-3 text-lg text-gray-600">
-                        Rundoc's platform and plugin protocol are open source. Run it on your own infrastructure, write your own plugins, and talk to us when you need enterprise support.
+                        Rundoc's platform and plugin protocol are open source. Run it on your own infrastructure and write your own plugins.
                     </p>
                     <a href="https://github.com/colwill/doc"
                        class="mt-5 inline-flex items-center justify-center rounded-lg bg-primary-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-700 transition-colors">
@@ -119,7 +149,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-secondary-600 font-semibold text-sm uppercase tracking-wide">Architecture</span>
-                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-gray-900">A Small Core, Everything Else a Plugin</h2>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-gray-900">Minimal Rust Core, Everything Else a Plugin</h2>
                 <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
                     The core authenticates, authorises, stores and routes. Plugins provide the features, so you can add only what your organisation needs.
                 </p>
@@ -160,7 +190,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <span class="text-secondary-600 font-semibold text-sm uppercase tracking-wide">Features</span>
-                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-gray-900">Everything Your Teams Look For</h2>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-gray-900">What Teams Look For</h2>
                 <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
                     Who owns this service, where its docs live, who can reach it, and how to get a sandbox, all answered in one place.
                 </p>
@@ -218,7 +248,7 @@
                         </svg>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Feature Flags</h3>
-                    <p class="text-gray-600">Built-in flags that any OpenFeature SDK can read over OFREP, with existing <a class="text-cfg-800 font-bold" href="https://runcfg.dev">Runcfg</a>, Unleash or Flagsmith providers read alongside them.</p>
+                    <p class="text-gray-600">Built-in flags that any OpenFeature SDK can read over OFREP, with existing <a class="text-cfg-800 font-bold" href="https://runcfg.com">Runcfg</a>, Unleash or Flagsmith providers read alongside them.</p>
                 </div>
                 <div class="p-6">
                     <div class="w-10 h-10 bg-secondary-100 rounded-lg flex items-center justify-center mb-4">
@@ -296,22 +326,22 @@
                         <span class="ml-auto pl-4 text-gray-500 text-sm">bash</span>
                     </div>
                     <pre x-show="activeTab === 'catalogue'" class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># Load the catalogue and assign a service account</span>
-<span class="text-yellow-400">cli</span> resources apply -f catalog.yaml
-<span class="text-yellow-400">cli</span> resources assign docs-bot service:card-gateway
+<span class="text-yellow-400">doc</span> resources apply -f catalog.yaml
+<span class="text-yellow-400">doc</span> resources assign docs-bot service:card-gateway
 
 <span class="text-gray-500"># Grant it write-only access to the knowledge base</span>
-<span class="text-yellow-400">cli</span> permissions grant --sa docs-bot plugin:kb:service:wo</code></pre>
+<span class="text-yellow-400">doc</span> permissions grant --sa docs-bot plugin:kb:service:wo</code></pre>
                     <pre x-show="activeTab === 'kb'" x-cloak class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># In CI: import docs, exit 0 when done</span>
-<span class="text-yellow-400">cli</span> kb import docs/ --resource service:card-gateway --wait
+<span class="text-yellow-400">doc</span> kb import docs/ --resource service:card-gateway --wait
 
 <span class="text-gray-500"># Keep a Confluence space in sync</span>
-<span class="text-yellow-400">cli</span> kb sources add confluence --space platform \
+<span class="text-yellow-400">doc</span> kb sources add confluence --space platform \
     --resource service:card-gateway --flavour cloud \
     --space-key PAY --schedule <span class="text-green-400">"0 * * * *"</span>
 
-<span class="text-yellow-400">cli</span> kb search <span class="text-green-400">"card tokenisation"</span></code></pre>
+<span class="text-yellow-400">doc</span> kb search <span class="text-green-400">"card tokenisation"</span></code></pre>
                     <pre x-show="activeTab === 'infra'" x-cloak class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># Request a bucket your group is allowed to create</span>
-<span class="text-yellow-400">cli</span> infra request aws-dev-bucket \
+<span class="text-yellow-400">doc</span> infra request aws-dev-bucket \
     --name fraud-scores \
     --team payments-core \
     --service card-gateway \
@@ -568,7 +598,95 @@
         </div>
     </section>
 
-    <section class="py-20 bg-primary-900">
+    <section id="install" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-secondary-600 font-semibold text-sm uppercase tracking-wide">Install</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-gray-900">One Command to a Running Platform</h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    On a Linux machine with Docker, the installer sets Rundoc up the way its README describes, then starts every part of it.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-gray-900 rounded-xl p-6 shadow-2xl" x-data="{ copied: false }">
+                <div class="flex items-center mb-4 border-b border-gray-700 pb-3">
+                    <div class="hidden sm:flex space-x-2 mr-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <span class="text-gray-500 text-sm">bash</span>
+                    <button type="button" @click="navigator.clipboard.writeText($refs.install.innerText.trim()); copied = true; setTimeout(() => copied = false, 1500)"
+                            class="ml-auto px-3 py-1.5 rounded-md text-sm font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 hover:text-white transition-colors" x-text="copied ? 'Copied' : 'Copy'">Copy</button>
+                </div>
+                <pre class="text-sm text-gray-100 whitespace-pre-wrap break-words"><code x-ref="install"><span class="text-yellow-400">curl</span> -fsSL https://rundoc.sh/install.sh | <span class="text-yellow-400">bash</span></code></pre>
+            </div>
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-4 font-bold">1</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Sets it up</h3>
+                    <p class="text-gray-600">Clones Rundoc and writes its <code class="text-sm">.env</code> with a fresh password for every database account, so nothing runs on a default.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-4 font-bold">2</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Makes you the admin</h3>
+                    <p class="text-gray-600">Your login becomes the first admin and the username for the first sign-in. Set <code class="text-sm">RUNDOC_ADMIN</code> to choose another.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-10 h-10 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-4 font-bold">3</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Starts everything</h3>
+                    <p class="text-gray-600">Installs <code class="text-sm">just</code> if it's missing and runs <code class="text-sm">just up</code>. The first run compiles every service in Docker, so it takes a while.</p>
+                </div>
+            </div>
+            <p class="mt-10 text-center text-gray-600 max-w-3xl mx-auto">
+                It finishes by showing where Rundoc is running and how to get the one-time password for the first sign-in.
+                <a href="install.sh" class="text-primary-600 font-medium hover:text-primary-700">Read the script</a> before you run it, or <a href="#run" class="text-primary-600 font-medium hover:text-primary-700">set it up by hand</a>.
+            </p>
+            <div class="mt-12 max-w-3xl mx-auto rounded-xl border border-gray-100 bg-gray-50 p-6 sm:p-8">
+                <h3 class="text-lg font-semibold text-gray-900">Options</h3>
+                <p class="mt-1 text-gray-600">Put any of these just before <code class="text-sm">bash</code>. This one makes <code class="text-sm">ada</code> the first admin and sets Rundoc up without starting it:</p>
+                <div class="mt-4 bg-gray-900 rounded-lg px-4 py-3 flex items-start gap-4" x-data="{ copied: false }">
+                    <pre class="flex-1 min-w-0 text-sm text-gray-100 whitespace-pre-wrap break-words"><code x-ref="example"><span class="text-yellow-400">curl</span> -fsSL https://rundoc.sh/install.sh | <span class="text-blue-400">RUNDOC_ADMIN</span>=ada <span class="text-blue-400">RUNDOC_START</span>=0 <span class="text-yellow-400">bash</span></code></pre>
+                    <button type="button" @click="navigator.clipboard.writeText($refs.example.innerText.trim()); copied = true; setTimeout(() => copied = false, 1500)"
+                            class="shrink-0 px-2.5 py-1 rounded-md text-xs font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 hover:text-white transition-colors" x-text="copied ? 'Copied' : 'Copy'">Copy</button>
+                </div>
+                <dl class="mt-6 divide-y divide-gray-200 border-t border-gray-200">
+                    <div class="py-4 sm:grid sm:grid-cols-[10rem_1fr] sm:gap-6">
+                        <dt><code class="text-sm font-semibold text-primary-700">RUNDOC_DIR</code></dt>
+                        <dd class="mt-1 sm:mt-0 text-gray-600">
+                            The directory to install into, relative to where you run the installer.
+                            <span class="block mt-1 text-sm text-gray-500">Default: <code>rundoc</code></span>
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-[10rem_1fr] sm:gap-6">
+                        <dt><code class="text-sm font-semibold text-primary-700">RUNDOC_ADMIN</code></dt>
+                        <dd class="mt-1 sm:mt-0 text-gray-600">
+                            The first admin's login, and the username for the first sign-in.
+                            <span class="block mt-1 text-sm text-gray-500">Default: your user name on this machine</span>
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-[10rem_1fr] sm:gap-6">
+                        <dt><code class="text-sm font-semibold text-primary-700">RUNDOC_START</code></dt>
+                        <dd class="mt-1 sm:mt-0 text-gray-600">
+                            Set it to <code class="text-sm">0</code> to set everything up without starting it. Start it later with <code class="text-sm">just up</code>.
+                            <span class="block mt-1 text-sm text-gray-500">Default: <code>1</code>, start it</span>
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:grid sm:grid-cols-[10rem_1fr] sm:gap-6">
+                        <dt><code class="text-sm font-semibold text-primary-700">RUNDOC_REF</code></dt>
+                        <dd class="mt-1 sm:mt-0 text-gray-600">
+                            The branch or tag to install, on a first install.
+                            <span class="block mt-1 text-sm text-gray-500">Default: <code>main</code></span>
+                        </dd>
+                    </div>
+                </dl>
+                <p class="mt-4 pt-4 border-t border-gray-200 text-sm text-gray-500">
+                    Run the installer again to update Rundoc and start it again. It never changes an existing <code>.env</code> or <code>config/doc.local.toml</code>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="run" class="py-20 bg-primary-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl sm:text-4xl font-bold text-white">Up on Your Own Hardware</h2>
@@ -588,7 +706,10 @@
                     </div>
                     <span class="ml-auto pl-4 text-gray-500 text-sm" x-text="activeTab === 'signin' ? '.env' : 'bash'"></span>
                 </div>
-                <pre x-show="activeTab === 'start'" class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># Copy the environment file and change every password in it</span>
+                <pre x-show="activeTab === 'start'" class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># By hand, instead of the installer</span>
+<span class="text-yellow-400">git</span> clone https://github.com/colwill/doc &amp;&amp; <span class="text-yellow-400">cd</span> doc
+
+<span class="text-gray-500"># Copy the environment file and change every password in it</span>
 cp .env.example .env
 
 <span class="text-gray-500"># Bootstrap, then storage, fabric, core, workers and plugins</span>
@@ -606,11 +727,11 @@ cp .env.example .env
 <span class="text-blue-400">DOC_OIDC_CLIENT_ID</span>=doc-platform
 <span class="text-blue-400">DOC_OIDC_TITLE</span>=<span class="text-green-400">"your work account"</span></code></pre>
                 <pre x-show="activeTab === 'cli'" x-cloak class="text-sm text-gray-100 overflow-x-auto"><code><span class="text-gray-500"># Log in with a personal access token</span>
-<span class="text-yellow-400">cli</span> login --url http://127.0.0.1:8080 --token doc_pat_...
+<span class="text-yellow-400">doc</span> login --url http://127.0.0.1:8080 --token doc_pat_...
 
-<span class="text-yellow-400">cli</span> plugins list
-<span class="text-yellow-400">cli</span> permissions list --user alice
-<span class="text-yellow-400">cli</span> github sync</code></pre>
+<span class="text-yellow-400">doc</span> plugins list
+<span class="text-yellow-400">doc</span> permissions list --user alice
+<span class="text-yellow-400">doc</span> github sync</code></pre>
             </div>
         </div>
     </section>
@@ -619,14 +740,11 @@ cp .env.example .env
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Bring your organisation together</h2>
             <p class="mt-4 text-xl text-gray-600">
-                See Rundoc running against your own GitHub organisation, and talk to us about enterprise support and rollout.
+                See Rundoc running against your own GitHub organisation.
             </p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://runcorp.dev/#contact" class="inline-block bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors shadow-lg">
-                    Book a demo
-                </a>
                 <a href="https://github.com/colwill/doc" class="inline-block border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-50 transition-colors">
-                    Try the open source version
+                    Self-host
                 </a>
             </div>
         </div>
@@ -640,13 +758,12 @@ cp .env.example .env
                 </a>
                 <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-neutral-400">
                     <a href="https://github.com/colwill" class="hover:text-white transition-colors">Open source</a>
-                    <a href="https://runcorp.dev/#contact" class="hover:text-white transition-colors">Contact</a>
                 </div>
             </div>
             <div class="mt-10 flex flex-wrap justify-center items-center gap-x-10 gap-y-6">
-                <a href="https://ccc.runcorp.dev" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/ccc.png" alt="RunCCC" class="h-6 w-auto"></a>
-                <a href="https://cfg.runcorp.dev" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/cfg.png" alt="RunCFG" class="h-6 w-auto"></a>
-                <a href="https://doc.runcorp.dev" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/doc.png" alt="RunDOC" class="h-6 w-auto"></a>
+                <a href="https://runccc.dev" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/ccc.png" alt="RunCCC" class="h-6 w-auto"></a>
+                <a href="https://runcfg.com" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/cfg.png" alt="RunCFG" class="h-6 w-auto"></a>
+                <a href="https://rundoc.sh" class="opacity-70 hover:opacity-100 transition-opacity"><img src="brand/doc.png" alt="RunDOC" class="h-6 w-auto"></a>
             </div>
             <div class="mt-10 pt-8 border-t border-neutral-800 text-center text-neutral-500 text-sm">
                 &copy; 2026 RunCorp.dev. All rights reserved.
